@@ -9,7 +9,8 @@ import {HomeIcon,MusicalNoteIcon,
   VideoCameraIcon,
   ChartPieIcon,
   ArrowDownTrayIcon,
-  HandThumbUpIcon
+  HandThumbUpIcon,
+  FireIcon,ShoppingBagIcon,NewspaperIcon
   
 
 } from '@heroicons/react/24/outline'
@@ -31,6 +32,13 @@ function Sidebar() {
       <MenuItems Icon={ClockIcon} item={"Watch Later"}/>
       <MenuItems Icon={ArrowDownTrayIcon} item={"Downloads"}/>
       <MenuItems Icon={HandThumbUpIcon} item={"Liked videos"}/>
+      <hr className='border border-spacing-2 bg-black ml-3'></hr>
+      <h2 className='font-bold text-xl ml-3'>Explore</h2>
+      <MenuItems Icon={FireIcon} item={"Trending"}/>
+      <MenuItems Icon={ShoppingBagIcon} item={"Shopping"}/>
+      <MenuItems Icon={MusicalNoteIcon} item={"Music"}/>
+      <MenuItems Icon={NewspaperIcon} item={"News"}/>
+
     </div>
   )
 }

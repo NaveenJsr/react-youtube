@@ -1,36 +1,92 @@
-import React from "react";
-import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import { useDispatch,useSelector } from "react-redux";
 import { toggleMenu } from "../Utils/AppSlice";
+import { cacheResult } from "../Utils/searchSlice";
 
 import Logo from "../Assets/YouTubeLogo.png";
 import Create from "../Assets/create.png";
 import Bell from "../Assets/bell.png"
-import {Bars3Icon} from "@heroicons/react/24/outline"
-import { Link } from "react-router-dom";
+import { Bars3Icon } from "@heroicons/react/24/outline"
+import { YOUTUBE_SUGGEST_API } from "../Utils/const";
+
+import {MagnifyingGlassIcon} from '@heroicons/react/24/outline'
 
 function Header() {
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [suggestions,setSuggestions] = useState([]);
+  const [showSuggestions,setShowSuggestion] = useState(false);
+
+  const searchCache = useSelector(store=>store.search.searchQueryResult)
+
+  useEffect(() => {
+
+    const timer = setTimeout(() => {
+      if(searchCache[searchQuery]){
+        console.log("Cache HIT")
+        setSuggestions(searchCache[searchQuery]);
+      }
+      else{
+        console.log("Cache Miss")
+        getSearchSuggestions();
+      }
+    }, 300)
+
+    return () => {
+      clearTimeout(timer);
+    }
+
+
+  }, [searchQuery])
+
+  const getSearchSuggestions = async () => {
+    if(!searchQuery){
+      return;
+    }
+    const data = await fetch(YOUTUBE_SUGGEST_API + searchQuery);
+    const json = await data.json();
+    setSuggestions(json[1])
+    let payload = {}
+    payload[searchQuery] = json[1];
+    dispatch(cacheResult(payload))
+  }
 
   const dispatch = useDispatch();
 
   return (
     <div className="flex justify-between m-2">
       <div className="flex items-center">
-        <Bars3Icon className="h-6 w-6 cursor-pointer" onClick={()=>{dispatch(toggleMenu())}}/>
-       <img src={Logo} className="h-6 ml-3" alt=""></img>
+        <Bars3Icon className="h-6 w-6 cursor-pointer" onClick={() => { dispatch(toggleMenu()) }} />
+        <img src={Logo} className="h-6 ml-3" alt=""></img>
       </div>
-      <div className="flex items-center w-1/2 justify-center">
-        <div className="flex items-center">
-          <input
-            type="text"
-            className="border border-gray-300 w-96 rounded-l-full px-3 py-1"
-            placeholder="Search">
-          </input>
-          <button className="border border-gray-300 px-4 py-1 rounded-r-full">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-            </svg>
-
-          </button>
+      <div className="flex items-center col-span-10 justify-center">
+        <div>
+          <div className="flex items-center">
+            <input
+              type="text"
+              className="border border-gray-300 w-96 rounded-l-full px-3 py-1"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={()=>setShowSuggestion(true)}
+              onBlur={()=>setShowSuggestion(false)}
+              placeholder="Search">
+            </input>
+            <button className="border border-gray-300 px-4 py-1 rounded-r-full">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+              </svg>
+            </button>
+          </div>
+          {showSuggestions && <div className="fixed bg-white py-2 w-96 rounded-md">
+            <ul>
+              {
+                suggestions?.map((suggestion)=>{
+                  return <li key={suggestion} className="px-5 py-1 mb-2 cursor-pointer flex hover:bg-gray-200"><MagnifyingGlassIcon className="h-6 w-6 mr-2" />{suggestion}</li>
+                })
+              }
+            </ul>
+          </div>
+          }
 
         </div>
 

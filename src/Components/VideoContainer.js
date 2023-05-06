@@ -12,7 +12,6 @@ function VideoContainer() {
 
   const dispatch = useDispatch();
   const popularVideos = useSelector(store=>store.app.popularVideos)
-  console.log(popularVideos)
 
   useEffect( ()=>{
       getVideo()
@@ -28,7 +27,7 @@ function VideoContainer() {
     <div className='grid grid-cols-5 mt-3'>
       {
         popularVideos?.map((video)=>{
-          return <Link to={`/watch?v=${video?.id}`}><VideoCard key={video?.id} snippet={video?.snippet} statistics={video?.statistics} /></Link>
+          return <Link key={video?.id} to={`/watch?v=${video?.id}`}><VideoCard  snippet={video?.snippet} statistics={video?.statistics} /></Link>
         })
       }
       

@@ -4,14 +4,16 @@ import { useSelector } from 'react-redux'
 
 import Sidebar from './Sidebar'
 import { Outlet } from 'react-router-dom'
-
+import { useSearchParams,useLocation } from 'react-router-dom'
 
 function Body() {
-
   const isMenuOpen = useSelector(store=>store.app.isMenuOpen)
+  
+  let currentLocation = useLocation();
+  console.log(currentLocation)
 
   return (
-    <div className='flex justify-between'>
+    <div className={`flex ${ currentLocation.pathname==="/"?"justify-center":""}`}>
       {
         isMenuOpen && <Sidebar/>
       }

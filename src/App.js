@@ -7,6 +7,9 @@ import Header from "./Components/Header"
 import Body from "./Components/Body";
 import MainContainer from "./Components/MainContainer";
 import Watch from "./Components/Watch"
+import SearchPage from "./Components/SearchPage";
+import NotFound from "./Components/NotFound"
+
 const appRouter = createBrowserRouter([{
   path:"/",
   element:<Body/>,
@@ -18,8 +21,13 @@ const appRouter = createBrowserRouter([{
     {
       path:'watch',
       element:<Watch/>
+    },
+    {
+      path:'search',
+      element:<SearchPage/>
     }
-  ]
+  ],
+  errorElement:<NotFound/>
 }])
 
 function App() {
