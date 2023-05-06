@@ -10,7 +10,6 @@ function Body() {
   const isMenuOpen = useSelector(store=>store.app.isMenuOpen)
   
   let currentLocation = useLocation();
-  console.log(currentLocation)
 
   return (
     <div className={`flex ${ currentLocation.pathname==="/"?"justify-center":""}`}>
