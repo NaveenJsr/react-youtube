@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
 import { useSearchParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
 
 import { closeMenu } from '../Utils/AppSlice'
 
@@ -15,6 +15,10 @@ function Watch() {
   }, [])
 
   const [searchParams] = useSearchParams();
+
+  if(!searchParams.get("v")){
+    return
+  }
 
 
   return (

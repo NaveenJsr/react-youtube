@@ -21,7 +21,7 @@ function LiveChat() {
         name:generateName(),
         message:generateMessage(Math.random()*31)
       }))
-    },1500)
+    },1000)
 
 
     return ()=>{

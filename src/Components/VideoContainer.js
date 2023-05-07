@@ -24,7 +24,7 @@ function VideoContainer() {
   }
 
   return (
-    <div className='grid grid-cols-5 mt-3'>
+    <div className='grid grid-cols-4 mt-3'>
       {
         popularVideos?.map((video)=>{
           return <Link key={video?.id} to={`/watch?v=${video?.id}`}><VideoCard  snippet={video?.snippet} statistics={video?.statistics} /></Link>

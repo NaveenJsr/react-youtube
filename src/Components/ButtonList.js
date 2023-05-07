@@ -3,7 +3,7 @@ import React from 'react'
 
 import Button from './Button'
 
-let ButtonItems = ["All","Mixes","Computer Programming","Music","Live","Computers","Startup Company","Apple","Gadgets","AI","Podcasts","Stock markets","Trailers","Thoughts"]
+let ButtonItems = ["All","Mixes","Computer Programming","Music","Live","Computers","Startup Company","Apple","Gadgets","AI","Podcasts","Stock markets"]
 
 function ButtonList() {
   return (

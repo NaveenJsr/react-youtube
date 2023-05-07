@@ -6,7 +6,7 @@ import VideoContainer from './VideoContainer'
 
 function MainContainer() {
   return (
-    <div className='min-w-[85%] m-2 '>
+    <div className='min-w-[88%] m-2 '>
         <ButtonList/>
         <VideoContainer/>
     </div>
