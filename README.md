@@ -3,14 +3,12 @@
 ### How to Run this Project
 
 ```Bash
-
     git clone https://github.com/kritebh/react-youtube.git
     npm install
     touch .env #For Windows -> New-Item .env
-
 ```
 
-Now In `.env` file we need YouTube API Key as following :
+Now in `.env` file we need YouTube API Key as following :
 
 ```javascript
     REACT_APP_YT_KEY = "Your YouTube API Key"
@@ -36,3 +34,28 @@ Just go to this page and follow the guide
 - Live Chat (with Dummy API Polling)
 
 ## Screenshots
+
+### Homepage
+
+![](./Screenshots/homepage.png)
+
+### Search Page
+
+![](./Screenshots/searchpage.png)
+
+### Watch Page
+
+![](./Screenshots/watchpage.png)
+
+### Nested Comment
+
+![](./Screenshots/nestedcomment.png)
+
+### Live Chat
+
+![](./Screenshots/livechat.png)
+
+### Search AutoSuggestion
+![](./Screenshots/autosuggestion.png)
+
+*Not optimized for smaller screen
